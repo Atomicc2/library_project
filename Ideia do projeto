@@ -1,0 +1,33 @@
+Andersons's Library
+
+Book:
+    Name:
+    Author:
+    Number of pages:
+    Gender: 
+    ---
+    check_information:
+
+Member:
+    Name:
+    Id:
+    Book count:
+    ---
+    check_information:
+
+Library:
+    Name: Anderson' Library
+    Book list:
+    Member list:
+    ---
+    register_book:
+    register_member:
+    list_books:
+    list_members:
+    barrow_books:
+    check_availability:
+
+
+
+
+
