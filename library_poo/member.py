@@ -6,3 +6,12 @@ class Member:
         self.name = name
         self.id = id
         self.book_count = book_count
+    
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'id': self.id,
+            'book_count': self.book_count
+        }
+
+    
