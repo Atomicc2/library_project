@@ -1,0 +1,16 @@
+[
+    {
+        "title": "A sele\u00e7\u00e3o",
+        "author": "Kiera Cass",
+        "genre": "Romance",
+        "number_pages": 360,
+        "status": true
+    },
+    {
+        "title": "A escolha",
+        "author": "Kiera cass",
+        "genre": "Romance",
+        "number_pages": 260,
+        "status": false
+    }
+]

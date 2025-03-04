@@ -6,23 +6,36 @@ from member import Member
 
 def main():
     
-    my_library = Library()
-    a = Book("A seleção", "Kiera Cass", 361, "Romance")
-    b = Member("Anderson")
-    my_library.register_book(a)
-    my_library.register_member(b)
-    c = Member("Anelyse")
-    my_library.register_member(c)
-    d = Book("A Escolha", "Kiera Cass", 351, "Romance")
-    my_library.register_book(d)
-    my_library.list_books()
-    my_library.list_member()
-    livro = 'A seleção'
-    status = my_library.check_availability(livro)
-    if status is True:
-        print(f"The book {livro} is available!")
+    andinho = Library('Andinho')
+
+    aSelecao = Book('A seleção', 'Kiera Cass', 'Romance', 360)
+    aEscolha = Book('A escolha', 'Kiera cass', 'Romance', 260)
+
+    anderson = Member('Anderson')
+    anelyse = Member('Anelyse')
+
+    andinho.register_book(aSelecao)
+    andinho.register_book(aEscolha)
+    andinho.register_member(anderson)
+    andinho.register_member(anelyse)
+
+    andinho.list_books()
+    andinho.list_members()
+
+    x = andinho.check_availability('A escolha')
+    if x == True:
+        print("Available")
     else:
-        print(f"The book {livro} isn't available!")
+        print("Isn't available")
+    
+    anderson.borrow_book('A escolha')
+    andinho.set_availability('A escolha')
+
+    x = andinho.check_availability('A escolha')
+    if x == True:
+        print("Available")
+    else:
+        print("Isn't available")
 
 if __name__ == "__main__":
     main()

@@ -1,19 +1,18 @@
-from utils import *
-
 class Book:
 
-    def __init__(self, title='<unknown>', author='unknown', gender='indefined', number_pages=0):
+    def __init__(self, title='<unknown>', author='unknown', genre='indefined', number_pages=0, status=True):
         self.title = title
         self.author = author
-        self.gender = gender
+        self.genre = genre
         self.number_pages = number_pages
+        self.status = status
     
     def to_dict(self):
-        return{
-            'title': self.title,
-            'author': self.author,
-            'gender': self.gender,
-            'number_pages': self.number_pages
-        }
-    
-    
+      return {
+          'title': self.title,
+          'author': self.author,
+          'genre': self.genre,
+          'number_pages': self.number_pages,
+          'status': self.status,
+
+      }
