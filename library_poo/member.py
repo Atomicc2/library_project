@@ -7,6 +7,7 @@ class Member:
         self.borrowed_books = []
 
     def to_dict(self):
+        #Return the member formatted for dictionary
         return {
             'name_user': self.name_user,
             'id': self.id,
@@ -14,8 +15,10 @@ class Member:
         }
 
     def borrow_book(self, title):
+        #Add the book to your borrowed books and update count list
         self.borrowed_books.append(title)
         self.book_count += 1
     
     def returne_book(self, title):
+        #Remove the book to your borrowed books
         self.borrowed_books.remove(title)

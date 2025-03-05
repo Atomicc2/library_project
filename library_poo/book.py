@@ -8,6 +8,7 @@ class Book:
         self.status = status
     
     def to_dict(self):
+      #Return the book formatted for dictionary
       return {
           'title': self.title,
           'author': self.author,
