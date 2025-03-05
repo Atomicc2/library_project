@@ -1,8 +1,10 @@
 #Functions Library
+from json import dump, load
+from os import path
+
 from book import Book
 from member import Member
-from os import path
-from json import dump, load
+import utils
 
 
 class Library:
@@ -26,52 +28,58 @@ class Library:
 
     def load_books(self):
         #Return the updated list of books for the attributes
-        books_path = f"data/{self.name}_books.json"
-        if path.exists(books_path):
-            with open(books_path, 'r') as book:
-                data_books = load(book)
-                self.books = [Book(**item) for item in data_books]
+        try:
+            books_path = f"data/{self.name}_books.json"
+            if path.exists(books_path):
+                with open(books_path, 'r') as book:
+                    data_books = load(book)
+                    self.books = [Book(**i) for i in data_books]
+        except FileNotFoundError:
+            print("ERRO! File not found!")
     
     def load_members(self):
         #Return the updated list of members for the attributes
-        members_path = f"data/{self.name}_members.json"
-        if path.exists(members_path):
-            with open(members_path, 'r') as member:
-                data_members = load(member)
-                self.members = [Member(**item) for item in data_members]
+        try:
+            members_path = f"data/{self.name}_members.json"
+            if path.exists(members_path):
+                with open(members_path, 'r') as member:
+                    data_members = load(member)
+                    self.members = [Member(**i) for i in data_members]
+        except FileNotFoundError:
+            print("ERRO! File not found!")
+            self.members = []
+            self.save_members()
 
     def register_book(self, obj):
         #Register a new book
         self.books.append(obj)
-        print(f"The book '{obj.title}' adicioned")
         self.save_books()
 
     def list_books(self):
         #List the books
         self.load_books()
         for i in self.books:
-            print(f"{i.title}: {i.status}")
+            print(f"{i.title}: {'Available' if i.status == True else 'Unavailable!'}")
     
-    def check_availability(self, name_book):
+    def check_availability(self, msg):
         #Check if the requested book is available
-        self.load_books()
-        for i in self.books:
-            if i.title == name_book:
-                return i.status
-        print(f"The book {name_book} was not found!")
+            name_book = utils.input_str(msg)
+            self.load_books()
+            for i in self.books:
+                if i.title == name_book:
+                    return i.status, name_book
             
     def register_member(self, member):
         #register a new member 
         self.members.append(member)
         member.id = len(self.members)
-        print(f"A new member '{member.name_user}' registered, id = {member.id}")
         self.save_members()
 
     def list_members(self):
         #List the members
         self.load_members()
         for i in self.members:
-            print(f"{i.name_user}")
+            print(f"Name:{i.name_user} - Id:{i.id}")
 
     def set_availability(self, title):
         #Set statues to false or true
@@ -79,3 +87,21 @@ class Library:
             if i.title == title:
                 i.status = not i.status
         self.save_books()    
+
+    def borrow_book(self):
+        #Add the book to your borrowed books and update count list
+        resp = self.check_availability("Which book do you want to borrow? ")
+        if resp[0] == True:
+            name = utils.input_str("Who will borrow the book? ")
+            for i in self.members:
+                if i.name_user == name:
+                    i.borrowed_books.append(resp[1])
+                    i.book_count += 1
+                    self.set_availability(resp[1])
+                    print(f"The member {i['name_user']} just borrowed the book {resp[1]}")
+                    break
+                else:
+                    print("User not found!")
+        else:
+            print("This book is unavailable!")
+                    

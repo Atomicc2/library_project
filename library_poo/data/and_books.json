@@ -4,13 +4,13 @@
         "author": "Kiera Cass",
         "genre": "Romance",
         "number_pages": 360,
-        "status": true
+        "status": false
     },
     {
         "title": "A escolha",
-        "author": "Kiera cass",
+        "author": "Kiera Cass",
         "genre": "Romance",
-        "number_pages": 260,
+        "number_pages": 350,
         "status": false
     }
 ]
