@@ -25,13 +25,3 @@ class Member:
             self.age = input_int("What's is the your age? ")
             print(f"A new member {self.name_user} added!")
             break
-'''
-    def borrow_book(self, title):
-        #Add the book to your borrowed books and update count list
-        self.borrowed_books.append(title)
-        self.book_count += 1
-    
-    def returne_book(self, title):
-        #Remove the book to your borrowed books
-        self.borrowed_books.remove(title)
-'''

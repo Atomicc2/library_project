@@ -1,4 +1,3 @@
-#Main function
 from time import sleep
 
 from library import Library
@@ -20,52 +19,30 @@ def main():
     utils.menus(f"Congratulations, the library '{my_library.name}' created! ")
     sleep(1)
 
-    #Loop the functionalities
+    #Options and functions
+    options = {
+        1: lambda: (sleep(1), new_book := Book(), new_book.new_book(), my_library.register_book(new_book)),
+        2: lambda: (sleep(1), new_member := Member(), new_member.new_member(), my_library.register_member(new_member)),
+        3: lambda: (sleep(1), my_library.show_status()),
+        4: lambda: (sleep(1), my_library.list_books()),
+        5: lambda: (sleep(1), my_library.list_members()),
+        6: lambda: (sleep(1), my_library.borrow_book()),
+        7: lambda: (sleep(1), my_library.return_book()),
+        8: lambda: (sleep(1), my_library.exit_library()),
+    }
+    #main program
     while True:
         utils.list_menus()
         sleep(1)
-
-        option = utils.input_int("Enter option: ")
-
-        if option == 1:
-            sleep(1)
-            new_book = Book()
-            new_book.new_book()
-            my_library.register_book(new_book)
+        resp = utils.input_int("Enter option: ")
+        utils.simple_lines()
         
-        if option == 2:
-            sleep(1)
-            new_member = Member()
-            new_member.new_member()
-            my_library.register_member(new_member)
-        
-        if option == 3:
-            sleep(1)
-            try:
-                resp = my_library.check_availability("Which book do you want to check out? ")
-                if resp[0]:
-                    print("This book is available!")
-                elif resp[0] == False:
-                    print("This book is unavailable!")
-            except TypeError:
-                print(f"The book {resp[1]} not found!")
+        action = options.get(resp)
 
-        if option == 4:
-            sleep(1)
-            my_library.list_books()
-
-        if option == 5:
-            sleep(1)
-            my_library.list_members()
-        if option == 6:
-            my_library.borrow_book()
-
-        if option == 7:
-            sleep(1)
-            utils.menus("Bye bye, see you later!")
-            my_library.save_books()
-            my_library.save_members()
-            break
+        if action:
+            action()
+        else:
+            print("Invalid option, tru again!")
             
 if __name__ == "__main__":
     main()

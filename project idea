@@ -12,6 +12,7 @@ AndersonsLibrary:
     name: 
     id: 
     book_count: 
+    borrowed_books:
     ###
     check_information: 
 
@@ -25,7 +26,9 @@ AndersonsLibrary:
     list_books: 
     list_members: 
     borrow_books: 
+    return_books:
     check_availability:
+    exit_library:
 
 
 
